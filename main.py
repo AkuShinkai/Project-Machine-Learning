@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
+import plotly.express as px
 
 data = pd.read_csv('matches.csv')
 data2 = pd.read_csv('matches2.csv')
@@ -48,7 +49,7 @@ st.title('Football Analytics')
 menu = st.sidebar.selectbox('Menu', [ 'Home', 'Data Showcase & Predictors'])
 
 if menu == 'Home' :
-    img = st.image('bola.jpg')
+    img = st.image('Bola.jpg')
     st.write('Ami Rofiatin                  223307032')
     st.write('Ersado Cahya Buana            223307039')
     st.write('Muhammad Fariz                223307049')
@@ -61,9 +62,10 @@ elif menu == 'Data Showcase & Predictors' :
     data
 
     st.subheader('Grafik Jumlah Gol Tim Tuan Rumah dan Tamu')
-    fig, ax = plt.subplots( )
-    data.groupby('team')[ [ 'gf', 'ga' ] ].sum( ).plot(kind='bar', ax=ax, rot=45)
-    st.pyplot(fig)
+    fig = px.bar(data.groupby('team')[['gf', 'ga']].sum().reset_index(), x='team', y=['gf', 'ga'],
+                 labels={'value': 'Goals', 'variable': 'Metric'}, barmode='group',
+                 title='Jumlah Gol Tim Tuan Rumah dan Tamu')
+    st.plotly_chart(fig)
 
     st.subheader('Distribusi Hasil Pertandingan')
     fig, ax = plt.subplots( )
@@ -71,9 +73,9 @@ elif menu == 'Data Showcase & Predictors' :
     st.pyplot(fig)
 
     st.subheader('Rata-rata Jumlah Gol per Pertandingan Seiring Waktu')
-    fig, ax = plt.subplots( )
-    data.groupby('date')[ 'gf' ].mean( ).plot(kind='line', ax=ax, rot=45)
-    st.pyplot(fig)
+    fig = px.line(data.groupby('date')['gf'].mean().reset_index(), x='date', y='gf',
+                  labels={'gf': 'Average Goals', 'date': 'Date'}, title='Rata-rata Jumlah Gol per Pertandingan Seiring Waktu')
+    st.plotly_chart(fig)
 
     st.write('')
     st.header('Prediction')
