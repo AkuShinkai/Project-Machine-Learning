@@ -1,5 +1,5 @@
-pip install streamlit
-pip install pandas
-pip install scikit-learn
-pip install matplotlib
-pip install plotly
+streamlit
+pandas
+scikit-learn
+matplotlib
+plotly
