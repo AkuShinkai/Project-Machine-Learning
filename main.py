@@ -73,7 +73,7 @@ elif menu == 'Data Showcase & Predictors' :
     st.pyplot(fig)
 
     st.subheader('Rata-rata Jumlah Gol per Pertandingan Seiring Waktu')
-    fig = px.line(data.groupby('date')['gf'].mean().reset_index(), x='date', y='gf',
+    fig = px.area(data.groupby('date')['gf'].mean().reset_index(), x='date', y='gf',
                   labels={'gf': 'Average Goals', 'date': 'Date'}, title='Rata-rata Jumlah Gol per Pertandingan Seiring Waktu')
     st.plotly_chart(fig)
 
