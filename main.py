@@ -8,9 +8,6 @@ data = pd.read_csv('matches.csv')
 data2 = pd.read_csv('matches2.csv')
 data3 = pd.read_csv('matches3.csv')
 
-# Gabungkan DataFrame utama dengan DataFrame baru
-data = pd.concat([data, data2, data3], ignore_index=True)
-
 def predict_outcome(home_team, away_team) :
     data[ "date" ] = pd.to_datetime(data[ "date" ])
     data[ "result" ] = data[ "result" ].replace({"W" : "Win", "L" : "Lose", "D" : "Draw"})
@@ -49,7 +46,7 @@ st.title('Football Analytics')
 menu = st.sidebar.selectbox('Menu', [ 'Home', 'Data Showcase & Predictors'])
 
 if menu == 'Home' :
-    img = st.image('Bola.jpg')
+    img = st.image('img.png')
     st.write('Ami Rofiatin                  223307032')
     st.write('Ersado Cahya Buana            223307039')
     st.write('Muhammad Fariz                223307049')
