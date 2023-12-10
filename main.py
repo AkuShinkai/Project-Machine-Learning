@@ -7,6 +7,10 @@ import plotly.express as px
 data = pd.read_csv('matches.csv')
 data2 = pd.read_csv('matches2.csv')
 data3 = pd.read_csv('matches3.csv')
+data4 = pd.read_csv('matches4.csv')
+data5 = pd.read_csv('matches5.csv')
+
+data = pd.concat([data, data2, data3, data4, data5], ignore_index=True)
 
 def predict_outcome(home_team, away_team) :
     data[ "date" ] = pd.to_datetime(data[ "date" ])
